@@ -1,2 +1,2 @@
 # Simple-Cart-App
- Tugas Pemrograman Perangkat Lunak - Simple Cart App
+ Tugas Pengujian Perangkat Lunak - Simple Cart App
