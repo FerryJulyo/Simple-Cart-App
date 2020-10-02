@@ -1,14 +1,29 @@
-const incrementQty = (qty) => parseInt(qty) + 1;
+const incrementQty = (qty) => qty + 1;
+
 const decrementQty = (qty) => {
-    if (qty > 1) return qty - 1;
-    return qty;
-
+    if (parseInt(qty) - 1 == 0) {
+        return 1;
+    } else {
+        return parseInt(qty) - 1;
+    }
 };
-const recalculateSubtotal = (price, qty, discount = 0) =>
-    (1 - parseFloat(discount) / 100) * price * qty;
 
-module.exports = {
-    incrementQty,
+const recalculateSubtotal = (price, qty) => {
+    return parseInt(price) * parseInt(qty);
+};
+
+const calculateDiscount = (subtotal, code) => {
+    if (code) {
+        discount = subtotal - subtotal * 0.2;
+        return discount;
+    } else {
+        return subtotal;
+    }
+};
+
+module.exports = { 
+    incrementQty, 
     decrementQty,
-    recalculateSubtotal
+    recalculateSubtotal,
+    calculateDiscount,
 };

@@ -1,64 +1,36 @@
-import {
-  incrementQty,
+import { 
+  incrementQty, 
   decrementQty,
-  recalculateSubtotal
+  recalculateSubtotal,
+  calculateDiscount,
 } from './helpers.js';
 
 const incrButton = document.querySelector('#incr');
 const decrButton = document.querySelector('#decr');
 const qtyInput = document.querySelector('#qty');
-const price = document.querySelector('#price');
-const subTotal = document.querySelector('#subtotal');
-const code = document.querySelector('#code');
-const confirmCodeBtn = document.querySelector('#confirmButton');
-let discount = 0;
+const subTotalText = document.querySelector('#subtotal');
+const price = document.querySelector("#price");
+const discountCode = document.querySelector("#code");
+const confirmButton = document.querySelector("#confirmButton");
 
 incrButton.addEventListener('click', () => {
   qtyInput.value = incrementQty(qtyInput.value);
-  subTotal.textContent = `Rp. ${recalculateSubtotal(
-    price.value, 
-    qty.value,
-    discount
-    )}`;
+  subtotalText.textContent = `Rp. ${recalculateSubtotal(
+    price.value,
+    qtyInput.value
+  )}`;
 });
 
 decrButton.addEventListener('click', () => {
   qtyInput.value = decrementQty(qtyInput.value);
-  subTotal.textContent = `Rp. ${recalculateSubtotal(
-    price.value, 
-    qty.value,
-    discount
-    )}`;
+  subtotalText.textContent = `Rp. ${recalculateSubtotal(
+    price.value,
+    qtyInput.value
+  )}`;
 });
 
-confirmCodeBtn.addEventListener("click", () => {
-  if (code.value === "25%") {
-    discount = 25;
-    subTotal.textContent = `Rp. ${recalculateSubtotal(
-      price.value, 
-      qty.value,
-      discount
-    )}`;
-  } else if (code.value === "50%") {
-    discount = 50;
-    subTotal.textContent = `Rp. ${recalculateSubtotal(
-      price.value, 
-      qty.value,
-      discount
-    )}`;
-  } else if (code.value === "75%") {
-    discount = 75;
-    subTotal.textContent = `Rp. ${recalculateSubtotal(
-      price.value, 
-      qty.value,
-      discount
-    )}`;
-  } else {
-    discount = 0;
-    subTotal.textContent = `Rp. ${recalculateSubtotal(
-      price.value, 
-      qty.value,
-      discount
-    )}`;
-  }
+confirmButton.addEventListener('click', () => {
+  let subtotal = recalculateSubtotal(price.value, qtyInput.value);
+  let total = calculateDiscount(subtotal, discountCode.value);
+  subtotalText.textContent = `Rp. ${total}`;
 });
